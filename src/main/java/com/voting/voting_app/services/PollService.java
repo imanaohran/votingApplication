@@ -1,6 +1,7 @@
 package com.voting.voting_app.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,10 @@ public class PollService {
 
     public List<Poll> getAllPolls() {
         return pollRepository.findAll();
+    }
+
+    public Optional<Poll> getPoll(Long id) {
+        return pollRepository.findById(id);
     }
 
 }
