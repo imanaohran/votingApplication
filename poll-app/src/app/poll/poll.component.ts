@@ -13,8 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class PollComponent implements OnInit {
 
-  newPoll: Poll = { 
-    id: 0, 
+  newPoll: Poll = {  
     question: '',
     options: [
       {optionText: '', voteCount: 0},
@@ -38,11 +37,23 @@ export class PollComponent implements OnInit {
   }
 
   createPoll() {
+    console.log('Podaci koji se šalju:', this.newPoll);
     this.pollService.createPoll(this.newPoll).subscribe({
       next: (createdPoll) => {
-        this.polls.push(createdPoll);},
+        this.polls.push(createdPoll);
+        this.resetPoll();},
       error: (error) => {console.error('There is an error!', error)}
-    })
+    });
+  }
+
+  resetPoll() {
+    this.newPoll = {  
+      question: '',
+      options: [
+        {optionText: '', voteCount: 0},
+        {optionText: '', voteCount: 0}
+      ]
+    }
   }
 
   trackByIndex(index: number): number{
